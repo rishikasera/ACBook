@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">ACBook</string>
+    <string name="spinner_title">Spinner_2</string>
+    <string-array name="planets_array">
+        <item>Debit</item>
+        <item>Credit</item>
+    </string-array>
+
+    <string-array name="debit_array">
+        <item>Cash Debit</item>
+        <item>SBI Debit </item>
+        <item>HDFC Debit </item>
+        <item>HDFC CC Debit </item>
+    </string-array>
+
+    <string-array name="credit_array">
+        <item>Cash Credit</item>
+        <item>SBI Credit</item>
+        <item>HDFC Credit</item>
+        <item>HDFC CC Credit</item>
+    </string-array>
+
+    <string-array name="ncnd_array">
+        <item>SBI to Cash</item>
+        <item>HDFC to Cash</item>
+        <item>HDFCCC to Cash</item>
+        <item>HDFC to CC</item>
+        <item>SBI to HDFC</item>
+        <item>HDFC to SBI</item>
+        <item>SBI to CC</item>
+        <item>Cash to CC</item>
+
+    </string-array>
+
+
+
+</resources>
