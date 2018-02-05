@@ -10,16 +10,16 @@ import java.io.IOException;
  * Created by home pc on 04/02/2018.
  */
 
-public class PrintFileHandling {
+public class FileIOHandler {
 
 
     File file;
     FileOutputStream outputStream;
 
-    public PrintFileHandling() {
+    public FileIOHandler() {
     }
 
-    public PrintFileHandling(String fName) {
+    public FileIOHandler(String fName) {
         file  = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fName);
         try {
             if(isFileExists(file)){

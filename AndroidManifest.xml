@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SecondActivity">
+        <activity android:name=".ShowRecordInTableActivity">
         </activity>
 
-        <activity android:name=".ThirdActivity">
+        <activity android:name=".ShowRecordActivity">
         </activity>
 
-        <activity android:name=".FourthActivity">
+        <activity android:name=".FirstTimeActivity">
         </activity>
     </application>
 

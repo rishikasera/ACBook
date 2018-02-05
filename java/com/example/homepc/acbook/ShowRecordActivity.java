@@ -19,9 +19,9 @@ import java.util.List;
  * Created by home pc on 26/01/2018.
  */
 
-public class ThirdActivity extends Activity {
+public class ShowRecordActivity extends Activity {
 
-    private Context mContext=ThirdActivity.this;
+    private Context mContext=ShowRecordActivity.this;
 
     private static final int REQUEST = 112;
 
@@ -39,7 +39,7 @@ public class ThirdActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_third);
+        setContentView(R.layout.activity_showRecord);
         context = getApplicationContext();
         db = new DatabaseHandler(this);
 
@@ -66,25 +66,25 @@ public class ThirdActivity extends Activity {
     }
 
     public void showCashTable(View view) {
-        Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        Intent secondActivityIntent = new Intent(this, ShowRecordInTableActivity.class);
         secondActivityIntent.putExtra("Table", TABLE_CONTACTS);
         startActivity(secondActivityIntent);
     }
 
     public void showSBITable(View view) {
-        Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        Intent secondActivityIntent = new Intent(this, ShowRecordInTableActivity.class);
         secondActivityIntent.putExtra("Table", TABLE_SBI);
         startActivity(secondActivityIntent);
     }
 
     public void showHDFCTable(View view) {
-        Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        Intent secondActivityIntent = new Intent(this, ShowRecordInTableActivity.class);
         secondActivityIntent.putExtra("Table", TABLE_HDFC);
         startActivity(secondActivityIntent);
     }
 
     public void showHDFCCCTable(View view) {
-        Intent secondActivityIntent = new Intent(this, SecondActivity.class);
+        Intent secondActivityIntent = new Intent(this, ShowRecordInTableActivity.class);
         secondActivityIntent.putExtra("Table", TABLE_HDFC_CC);
         startActivity(secondActivityIntent);
     }
@@ -133,7 +133,7 @@ public class ThirdActivity extends Activity {
     }
 
     void printAllTable(View v){
-             PrintFileHandling pfh = new PrintFileHandling();
+             FileIOHandler pfh = new FileIOHandler();
              if(pfh.isExternalStorageWritable()){
                  printFile();
              }else{
@@ -149,16 +149,16 @@ public class ThirdActivity extends Activity {
         }
         final Calendar c = Calendar.getInstance();
         String dte = c.get(Calendar.DAY_OF_MONTH)+"_"+c.get(Calendar.MONTH)+"_"+c.get(Calendar.YEAR);
-        PrintFileHandling cashFile = new PrintFileHandling("CashFile_"+dte+".txt");
+        FileIOHandler cashFile = new FileIOHandler("CashFile_"+dte+".txt");
         cashFile.writeFile(getTableData(TABLE_CONTACTS));
 
-        PrintFileHandling sbiFile = new PrintFileHandling("SBIFile_"+dte+".txt");
+        FileIOHandler sbiFile = new FileIOHandler("SBIFile_"+dte+".txt");
         sbiFile.writeFile(getTableData(TABLE_SBI));
 
-        PrintFileHandling hdfcFile = new PrintFileHandling("HDFCFile_"+dte+".txt");
+        FileIOHandler hdfcFile = new FileIOHandler("HDFCFile_"+dte+".txt");
         hdfcFile.writeFile(getTableData(TABLE_HDFC));
 
-        PrintFileHandling hdfcccFile = new PrintFileHandling("HDFCCCFile_"+dte+".txt");
+        FileIOHandler hdfcccFile = new FileIOHandler("HDFCCCFile_"+dte+".txt");
         hdfcccFile.writeFile(getTableData(TABLE_HDFC_CC));
 
         Toast.makeText(getApplicationContext(), "File stored.", Toast.LENGTH_SHORT).show();
@@ -166,9 +166,9 @@ public class ThirdActivity extends Activity {
 
     String getTableData(String tableToShow) {
         String data = tableToShow + "\n*********************\n";
-        List<Cash> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
+        List<Record> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
 
-        for (Cash cn : fullDbRecordInList) {
+        for (Record cn : fullDbRecordInList) {
 
             String printId_Str = cn.get_id() + "";
             String printDate = cn.get_date();

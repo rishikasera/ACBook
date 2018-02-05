@@ -195,7 +195,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
     // code to add the new contact
-    void addContact(Cash detail) {
+    void addContact(Record detail) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -211,7 +211,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    void addContactInTable(Cash detail,String table) {
+    void addContactInTable(Record detail, String table) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -303,7 +303,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
 
-    Cash getContact(int id) {
+    Record getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
@@ -312,14 +312,14 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Cash detail = new Cash(Integer.parseInt(cursor.getString(0)),
+        Record detail = new Record(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),Integer.parseInt(cursor.getString(3)),
                 cursor.getString(4), Integer.parseInt(cursor.getString(5)));
         // return contact
         return detail;
     }
 
-    Cash getContactFromTable(int id,final String table) {
+    Record getContactFromTable(int id, final String table) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(table, new String[] { KEY_ID,
@@ -328,7 +328,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Cash detail = new Cash(Integer.parseInt(cursor.getString(0)),
+        Record detail = new Record(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)),Integer.parseInt(cursor.getString(3)),
                 cursor.getString(4), Integer.parseInt(cursor.getString(5)));
         // return contact
@@ -351,8 +351,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
     // code to get all contacts in a list view
-    public List<Cash> getAllContacts() {
-        List<Cash> contactList = new ArrayList<Cash>();
+    public List<Record> getAllContacts() {
+        List<Record> contactList = new ArrayList<Record>();
         // Select All Query
         String selectQuery = "SELECT * FROM" + TABLE_CONTACTS;
 
@@ -362,7 +362,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Cash contact = new Cash();
+                Record contact = new Record();
                 contact.set_id(Integer.parseInt(cursor.getString(0)));
                 contact.set_date(cursor.getString(1));
                 contact.set_money(Integer.parseInt(cursor.getString(2)));
@@ -380,8 +380,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
     // code to get all contacts in a list view
-    public List<Cash> getAllContactsFromTable(String table) {
-        List<Cash> contactList = new ArrayList<Cash>();
+    public List<Record> getAllContactsFromTable(String table) {
+        List<Record> contactList = new ArrayList<Record>();
         // Select All Query
         Log.e("->->->->->->->->-> ", "Table match : "+table);
 
@@ -422,7 +422,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 addConCount++;
-                Cash contact = new Cash();
+                Record contact = new Record();
                 contact.set_id(Integer.parseInt(cursor.getString(0)));
                 contact.set_date(cursor.getString(1));
                 contact.set_money(Integer.parseInt(cursor.getString(2)));
@@ -468,7 +468,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CONTACTS,null,null);
         db.rawQuery(qury, null);
-        addContact(new Cash("null",0,0,"first",0));
+        addContact(new Record("null",0,0,"first",0));
         db.close();;
         return true;
     }
@@ -479,7 +479,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(table,null,null);
         db.rawQuery(qury, null);
-        addContactInTable(new Cash("null",0,0,"first",0),table);
+        addContactInTable(new Record("null",0,0,"first",0),table);
         db.close();;
         return true;
     }
@@ -503,10 +503,10 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         db.rawQuery(qury3, null);
         db.rawQuery(qury4, null);
 
-        addContactInTable(new Cash("null",0,0,"first",0),TABLE_CONTACTS);
-        addContactInTable(new Cash("null",0,0,"first",0),TABLE_SBI);
-        addContactInTable(new Cash("null",0,0,"first",0),TABLE_HDFC);
-        addContactInTable(new Cash("null",0,0,"first",0),TABLE_HDFC_CC);
+        addContactInTable(new Record("null",0,0,"first",0),TABLE_CONTACTS);
+        addContactInTable(new Record("null",0,0,"first",0),TABLE_SBI);
+        addContactInTable(new Record("null",0,0,"first",0),TABLE_HDFC);
+        addContactInTable(new Record("null",0,0,"first",0),TABLE_HDFC_CC);
 
         db.close();;
         return true;

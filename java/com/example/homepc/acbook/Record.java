@@ -1,6 +1,6 @@
 package com.example.homepc.acbook;
 
-public class Cash {
+public class Record {
 
     int _id;
     String _date;
@@ -9,10 +9,10 @@ public class Cash {
     String _pur;
     int _clear;
 
-    public Cash() {
+    public Record() {
     }
 
-    public Cash(int _id, String _date, int _money, int _tt, String _pur, int _clear) {
+    public Record(int _id, String _date, int _money, int _tt, String _pur, int _clear) {
         this._id = _id;
         this._date = _date;
         this._money = _money;
@@ -21,7 +21,7 @@ public class Cash {
         this._clear = _clear;
     }
 
-    public Cash( String _date, int _money, int _tt, String _pur, int _clear) {
+    public Record(String _date, int _money, int _tt, String _pur, int _clear) {
         this._date = _date;
         this._money = _money;
         this._tt = _tt;

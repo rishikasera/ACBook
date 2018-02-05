@@ -22,7 +22,7 @@ import java.util.List;
  * Created by home pc on 20/01/2018.
  */
 
-public class SecondActivity extends Activity {
+public class ShowRecordInTableActivity extends Activity {
 
     private static final String TABLE_CONTACTS = "cashManager";
     private static final String TABLE_SBI = "sbiTable";
@@ -34,14 +34,14 @@ public class SecondActivity extends Activity {
     String tableToShow = "";
     TextView tvTableName ;
 
-    private Context mContext=SecondActivity.this;
+    private Context mContext=ShowRecordInTableActivity.this;
 
     private static final int REQUEST = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_showRecordInTable);
         context = getApplicationContext();
         tvTableName = (TextView) findViewById(R.id.tableName);
         Intent intentFromFirstAct = getIntent();
@@ -106,9 +106,9 @@ public class SecondActivity extends Activity {
 
 
     void fillTable(int printRecordFrom){
-        List<Cash> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
+        List<Record> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
 
-        for (Cash cn : fullDbRecordInList) {
+        for (Record cn : fullDbRecordInList) {
             //String log = "Id: " + cn.get_id() + " ,Date: " + cn.get_date() + " ,Money: " +
             //        cn.get_money() + " , C/D:" + cn.get_tt() + " ,Pur:" + cn.get_pur() + " ,OS:" + cn.get_clear();
             int printId_INT = cn.get_id();
@@ -154,7 +154,7 @@ public class SecondActivity extends Activity {
 
 
     void printThisTable(View v){
-        PrintFileHandling pfh = new PrintFileHandling();
+        FileIOHandler pfh = new FileIOHandler();
         if(pfh.isExternalStorageWritable()){
             printFile();
         }else{
@@ -173,15 +173,15 @@ public class SecondActivity extends Activity {
 
 
 
-        PrintFileHandling file;
+        FileIOHandler file;
         if(tableToShow.equals(TABLE_CONTACTS)){
-            file = new PrintFileHandling("CashFile_"+dte+".txt");
+            file = new FileIOHandler("CashFile_"+dte+".txt");
         }else if(tableToShow.equals(TABLE_SBI)){
-            file = new PrintFileHandling("SBIFile_"+dte+".txt");
+            file = new FileIOHandler("SBIFile_"+dte+".txt");
         }else if(tableToShow.equals(TABLE_HDFC)){
-            file = new PrintFileHandling("HDFCFile_"+dte+".txt");
+            file = new FileIOHandler("HDFCFile_"+dte+".txt");
         }else{
-            file = new PrintFileHandling("HDFCCCFile_"+dte+".txt");
+            file = new FileIOHandler("HDFCCCFile_"+dte+".txt");
         }
 
         file.writeFile(getTableData(tableToShow));
@@ -192,9 +192,9 @@ public class SecondActivity extends Activity {
 
     String getTableData(String tableToShow) {
         String data = tableToShow + "\n*********************\n";
-        List<Cash> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
+        List<Record> fullDbRecordInList = db.getAllContactsFromTable(tableToShow);
 
-        for (Cash cn : fullDbRecordInList) {
+        for (Record cn : fullDbRecordInList) {
 
             String printId_Str = cn.get_id() + "";
             String printDate = cn.get_date();

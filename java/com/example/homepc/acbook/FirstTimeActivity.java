@@ -11,7 +11,7 @@ import android.widget.Toast;
  * Created by home pc on 26/01/2018.
  */
 
-public class FourthActivity extends Activity{
+public class FirstTimeActivity extends Activity{
     EditText cashText;
     EditText hdfcText;
     EditText sbiText;
@@ -23,7 +23,7 @@ public class FourthActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fourth);
+        setContentView(R.layout.activity_forFirstTime);
 
         cashText = (EditText)findViewById(R.id.cashCol);
         sbiText = (EditText)findViewById(R.id.sbiCol);
