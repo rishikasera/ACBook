@@ -26,7 +26,7 @@ public class ShowRecordActivity extends Activity {
     private static final int REQUEST = 112;
 
     DatabaseHandler db;
-    private static final String TABLE_CONTACTS = "cashManager";
+    private static final String TABLE_CASH = "cashManager";
     private static final String TABLE_SBI = "sbiTable";
     private static final String TABLE_HDFC = "hdfcTable";
     private static final String TABLE_HDFC_CC = "hdfcCCTable";
@@ -48,8 +48,8 @@ public class ShowRecordActivity extends Activity {
         tv_avalebalHDFCBalance3 = (TextView) findViewById(R.id.hdfcbal3);
         tv_avalebalHDFCCCBalance3 = (TextView) findViewById(R.id.hdfcccbal3);
 
-        int avalebalRecordLineInCashTable = db.getDetailsCountFromTable(TABLE_CONTACTS);
-        int avalebalBalanceInCash = db.getContactFromTable(avalebalRecordLineInCashTable, TABLE_CONTACTS).get_clear();
+        int avalebalRecordLineInCashTable = db.getDetailsCountFromTable(TABLE_CASH);
+        int avalebalBalanceInCash = db.getContactFromTable(avalebalRecordLineInCashTable, TABLE_CASH).get_clear();
         tv_avalebalCashBalance3.setText(avalebalBalanceInCash + "");
 
         int avalebalRecordLineInSBITable = db.getDetailsCountFromTable(TABLE_SBI);
@@ -67,7 +67,7 @@ public class ShowRecordActivity extends Activity {
 
     public void showCashTable(View view) {
         Intent secondActivityIntent = new Intent(this, ShowRecordInTableActivity.class);
-        secondActivityIntent.putExtra("Table", TABLE_CONTACTS);
+        secondActivityIntent.putExtra("Table", TABLE_CASH);
         startActivity(secondActivityIntent);
     }
 
@@ -150,7 +150,7 @@ public class ShowRecordActivity extends Activity {
         final Calendar c = Calendar.getInstance();
         String dte = c.get(Calendar.DAY_OF_MONTH)+"_"+c.get(Calendar.MONTH)+"_"+c.get(Calendar.YEAR);
         FileIOHandler cashFile = new FileIOHandler("CashFile_"+dte+".txt");
-        cashFile.writeFile(getTableData(TABLE_CONTACTS));
+        cashFile.writeFile(getTableData(TABLE_CASH));
 
         FileIOHandler sbiFile = new FileIOHandler("SBIFile_"+dte+".txt");
         sbiFile.writeFile(getTableData(TABLE_SBI));

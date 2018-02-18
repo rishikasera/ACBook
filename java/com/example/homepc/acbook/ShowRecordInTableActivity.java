@@ -24,7 +24,7 @@ import java.util.List;
 
 public class ShowRecordInTableActivity extends Activity {
 
-    private static final String TABLE_CONTACTS = "cashManager";
+    private static final String TABLE_CASH = "cashManager";
     private static final String TABLE_SBI = "sbiTable";
     private static final String TABLE_HDFC = "hdfcTable";
     private static final String TABLE_HDFC_CC = "hdfcCCTable";
@@ -174,7 +174,7 @@ public class ShowRecordInTableActivity extends Activity {
 
 
         FileIOHandler file;
-        if(tableToShow.equals(TABLE_CONTACTS)){
+        if(tableToShow.equals(TABLE_CASH)){
             file = new FileIOHandler("CashFile_"+dte+".txt");
         }else if(tableToShow.equals(TABLE_SBI)){
             file = new FileIOHandler("SBIFile_"+dte+".txt");

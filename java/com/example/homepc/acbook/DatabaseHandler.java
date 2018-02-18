@@ -20,7 +20,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "AcManager";
-    private static final String TABLE_CONTACTS = "cashManager";
+    private static final String TABLE_CASH = "cashManager";
     private static final String TABLE_SBI = "sbiTable";
     private static final String TABLE_HDFC = "hdfcTable";
     private static final String TABLE_HDFC_CC = "hdfcCCTable";
@@ -31,7 +31,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     private static final String KEY_PUR = "pur";
     private static final String KEY_CLEAR = "clear";
 
-    String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
+    String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CASH + "("
             + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_DATE + " TEXT,"
             + KEY_MONEY + " INTEGER,"
@@ -128,7 +128,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CASH);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SBI);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HDFC_CC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HDFC);
@@ -161,8 +161,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_PUR, "null"); // Contact Phone
         values.put(KEY_CLEAR, money);
 
-        if(table.equals(TABLE_CONTACTS)){
-            db.insert(TABLE_CONTACTS, null, values);
+        if(table.equals(TABLE_CASH)){
+            db.insert(TABLE_CASH, null, values);
         }else if(table.equals(TABLE_SBI)){
             db.insert(TABLE_SBI, null, values);
         }else if(table.equals(TABLE_HDFC)){
@@ -187,7 +187,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_PUR, "NULL"); // Contact Phone
         values.put(KEY_CLEAR, 0);
 
-        db.insert(TABLE_CONTACTS, null, values);
+        db.insert(TABLE_CASH, null, values);
         db.insert(TABLE_SBI, null, values);
         db.insert(TABLE_HDFC, null, values);
         db.insert(TABLE_HDFC_CC, null, values);
@@ -206,7 +206,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_CLEAR, detail.get_clear());
 
         // Inserting Row
-        db.insert(TABLE_CONTACTS, null, values);
+        db.insert(TABLE_CASH, null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
@@ -221,8 +221,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_PUR, detail.get_pur()); // Contact Phone
         values.put(KEY_CLEAR, detail.get_clear());
 
-        if(table.equals(TABLE_CONTACTS)){
-            db.insert(TABLE_CONTACTS, null, values);
+        if(table.equals(TABLE_CASH)){
+            db.insert(TABLE_CASH, null, values);
         }else if(table.equals(TABLE_SBI)){
             db.insert(TABLE_SBI, null, values);
         }else if(table.equals(TABLE_HDFC)){
@@ -254,7 +254,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
     // Getting contacts Count
     public int getDetailsCount() {
-        String countQuery = "SELECT * FROM " + TABLE_CONTACTS;
+        String countQuery = "SELECT * FROM " + TABLE_CASH;
         Log.d("Reading: ", "Step 2.1");
         SQLiteDatabase db1 = this.getReadableDatabase();
         Log.d("Reading: ", "Step 2.2");
@@ -271,8 +271,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
         String countQuery = "";
-        if(table.equals(TABLE_CONTACTS)){
-            countQuery = "SELECT * FROM " + TABLE_CONTACTS;
+        if(table.equals(TABLE_CASH)){
+            countQuery = "SELECT * FROM " + TABLE_CASH;
         }else if(table.equals(TABLE_SBI)){
             countQuery = "SELECT * FROM " + TABLE_SBI;
         }else if(table.equals(TABLE_HDFC)){
@@ -306,7 +306,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     Record getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
+        Cursor cursor = db.query(TABLE_CASH, new String[] { KEY_ID,
                         KEY_DATE, KEY_MONEY,KEY_TT,KEY_PUR,KEY_CLEAR }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
@@ -354,7 +354,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     public List<Record> getAllContacts() {
         List<Record> contactList = new ArrayList<Record>();
         // Select All Query
-        String selectQuery = "SELECT * FROM" + TABLE_CONTACTS;
+        String selectQuery = "SELECT * FROM" + TABLE_CASH;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -386,9 +386,9 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         Log.e("->->->->->->->->-> ", "Table match : "+table);
 
         String selectQuery = "";
-        if(table.equals(TABLE_CONTACTS.toString())){
-            selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
-            Log.d("->->->->->->->->-> ", "SELECT * FROM  + TABLE_CONTACTS");
+        if(table.equals(TABLE_CASH.toString())){
+            selectQuery = "SELECT * FROM " + TABLE_CASH;
+            Log.d("->->->->->->->->-> ", "SELECT * FROM  + TABLE_CASH");
         }else if(table.equals(TABLE_SBI.toString())){
             selectQuery = "SELECT * FROM " + TABLE_SBI;
             Log.d("->->->->->->->->-> ", "SELECT * FROM  + TABLE_SBI");
@@ -402,7 +402,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
             Log.e("->->->->->->->->-> ", "No Table match");
         }
 
-        //selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
+        //selectQuery = "SELECT * FROM " + TABLE_CASH;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -464,9 +464,9 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
     public boolean deleteAllRecord(){
-        String qury = "DELETE FROM "+TABLE_CONTACTS;
+        String qury = "DELETE FROM "+ TABLE_CASH;
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CONTACTS,null,null);
+        db.delete(TABLE_CASH,null,null);
         db.rawQuery(qury, null);
         addContact(new Record("null",0,0,"first",0));
         db.close();;
@@ -486,14 +486,14 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
 
 
     public boolean deleteAllRecordAllTable(){
-        String qury1 = "DELETE FROM "+TABLE_CONTACTS;
+        String qury1 = "DELETE FROM "+ TABLE_CASH;
         String qury2 = "DELETE FROM "+TABLE_SBI;
         String qury3 = "DELETE FROM "+TABLE_HDFC;
         String qury4 = "DELETE FROM "+TABLE_HDFC_CC;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_CONTACTS,null,null);
+        db.delete(TABLE_CASH,null,null);
         db.delete(TABLE_SBI,null,null);
         db.delete(TABLE_HDFC,null,null);
         db.delete(TABLE_HDFC_CC,null,null);
@@ -503,7 +503,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         db.rawQuery(qury3, null);
         db.rawQuery(qury4, null);
 
-        addContactInTable(new Record("null",0,0,"first",0),TABLE_CONTACTS);
+        addContactInTable(new Record("null",0,0,"first",0), TABLE_CASH);
         addContactInTable(new Record("null",0,0,"first",0),TABLE_SBI);
         addContactInTable(new Record("null",0,0,"first",0),TABLE_HDFC);
         addContactInTable(new Record("null",0,0,"first",0),TABLE_HDFC_CC);

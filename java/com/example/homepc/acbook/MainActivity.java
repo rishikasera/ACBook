@@ -29,7 +29,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private static final String TABLE_CONTACTS = "cashManager";
+    private static final String TABLE_CASH = "cashManager";
     private static final String TABLE_SBI = "sbiTable";
     private static final String TABLE_HDFC = "hdfcTable";
     private static final String TABLE_HDFC_CC = "hdfcCCTable";
@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
 
-            avalebalRecordLineInCashTable = db.getDetailsCountFromTable(TABLE_CONTACTS);
-            avalebalBalanceInCash = db.getContactFromTable(avalebalRecordLineInCashTable,TABLE_CONTACTS).get_clear();
+            avalebalRecordLineInCashTable = db.getDetailsCountFromTable(TABLE_CASH);
+            avalebalBalanceInCash = db.getContactFromTable(avalebalRecordLineInCashTable, TABLE_CASH).get_clear();
             tv_avalebalCashBalance.setText(avalebalBalanceInCash + "");
 
 
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 avalebalBalanceInHDFC = Integer.parseInt(data.getStringExtra("hdfc12"));
                 avalebalBalanceInHDFCCC = Integer.parseInt(data.getStringExtra("hdfccc12"));
 
-                db.addContact2(TABLE_CONTACTS,avalebalBalanceInCash);
+                db.addContact2(TABLE_CASH,avalebalBalanceInCash);
                 db.addContact2(TABLE_SBI,avalebalBalanceInSBI);
                 db.addContact2(TABLE_HDFC,avalebalBalanceInHDFC);
                 db.addContact2(TABLE_HDFC_CC,avalebalBalanceInHDFCCC);
@@ -411,7 +411,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }else {
                         avalebalBalanceAfterBuzz = avalebalBalanceInCash - usrBuzzMoney_int;
                         avalebalBalanceInCash = avalebalBalanceAfterBuzz;
-                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, usrBuzzCause, avalebalBalanceAfterBuzz),TABLE_CONTACTS);
+                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, usrBuzzCause, avalebalBalanceAfterBuzz), TABLE_CASH);
                         tv_avalebalCashBalance.setText(avalebalBalanceAfterBuzz + "");
                         Toast.makeText(getBaseContext(), "Record Added in Record Table.", Toast.LENGTH_LONG).show();
                     }
@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if(buzzSubTypeForCon == 0){
                     avalebalBalanceAfterBuzz = avalebalBalanceInCash + usrBuzzMoney_int;
                     avalebalBalanceInCash = avalebalBalanceAfterBuzz;
-                    db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, usrBuzzCause, avalebalBalanceAfterBuzz),TABLE_CONTACTS);
+                    db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, usrBuzzCause, avalebalBalanceAfterBuzz), TABLE_CASH);
                     tv_avalebalCashBalance.setText(avalebalBalanceAfterBuzz + "");
                     Toast.makeText(getBaseContext(), "Record Added in Record Table.", Toast.LENGTH_LONG).show();
                 }
@@ -500,7 +500,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             avalebalBalanceInSBIAfterBuzz = avalebalBalanceInSBI - usrBuzzMoney_int;
                             avalebalBalanceInCash = avalebalBalanceInCashAfterBuzz;
                             avalebalBalanceInSBI = avalebalBalanceInSBIAfterBuzz;
-                            db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "SBI -> Record", avalebalBalanceInCashAfterBuzz),TABLE_CONTACTS);
+                            db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "SBI -> Record", avalebalBalanceInCashAfterBuzz), TABLE_CASH);
                             db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, "SBI -> Record", avalebalBalanceInSBI),TABLE_SBI);
                             tv_avalebalCashBalance.setText(avalebalBalanceInCashAfterBuzz + "");
                   //          tv_avalebalSBIBalance.setText(avalebalBalanceInSBIAfterBuzz + "");
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         avalebalBalanceInHDFCAfterBuzz = avalebalBalanceInHDFC - usrBuzzMoney_int;
                         avalebalBalanceInCash = avalebalBalanceInCashAfterBuzz;
                         avalebalBalanceInHDFC = avalebalBalanceInHDFCAfterBuzz;
-                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "HDFC -> Record", avalebalBalanceInCashAfterBuzz),TABLE_CONTACTS);
+                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "HDFC -> Record", avalebalBalanceInCashAfterBuzz), TABLE_CASH);
                         db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, "HDFC -> Record", avalebalBalanceInHDFC),TABLE_HDFC);
                         tv_avalebalCashBalance.setText(avalebalBalanceInCashAfterBuzz + "");
                  //       tv_avalebalHDFCBalance.setText(avalebalBalanceInHDFCAfterBuzz + "");
@@ -532,7 +532,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         avalebalBalanceInHDFCCCAfterBuzz = avalebalBalanceInHDFCCC - usrBuzzMoney_int;
                         avalebalBalanceInCash = avalebalBalanceInCashAfterBuzz;
                         avalebalBalanceInHDFCCC = avalebalBalanceInHDFCCCAfterBuzz;
-                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "HDFCCC -> Record", avalebalBalanceInCashAfterBuzz),TABLE_CONTACTS);
+                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "HDFCCC -> Record", avalebalBalanceInCashAfterBuzz), TABLE_CASH);
                         db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, "HDFCCC -> Record", avalebalBalanceInHDFCCC),TABLE_HDFC_CC);
                         tv_avalebalCashBalance.setText(avalebalBalanceInCashAfterBuzz + "");
                   //      tv_avalebalHDFCCCBalance.setText(avalebalBalanceInHDFCCCAfterBuzz + "");
@@ -614,7 +614,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         avalebalBalanceInCash = avalebalBalanceInCashAfterBuzz;
                         avalebalBalanceInHDFCCC = avalebalBalanceInHDFCCCAfterBuzz;
                         db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 1, "CASH -> HDFCCC", avalebalBalanceInHDFCCC),TABLE_HDFC_CC);
-                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, "CASH -> HDFCCC", avalebalBalanceInCash),TABLE_CONTACTS);
+                        db.addContactInTable(new Record(usrBuzzDate, usrBuzzMoney_int, 0, "CASH -> HDFCCC", avalebalBalanceInCash), TABLE_CASH);
                             tv_avalebalCashBalance.setText(avalebalBalanceInCashAfterBuzz + "");
                         //    tv_avalebalHDFCBalance.setText(avalebalBalanceInHDFCAfterBuzz + "");
                         Toast.makeText(getBaseContext(), "Record Added in CASH and HDFCCC Table.", Toast.LENGTH_LONG).show();
@@ -639,7 +639,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void showCashTable(View view){
         Intent secondActivityIntent = new Intent(this,ShowRecordInTableActivity.class);
-        secondActivityIntent.putExtra("Table",TABLE_CONTACTS);
+        secondActivityIntent.putExtra("Table", TABLE_CASH);
         startActivity(secondActivityIntent);
     }
 
