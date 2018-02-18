@@ -17,9 +17,6 @@ public class FirstTimeActivity extends Activity{
     EditText sbiText;
     EditText hdfcccText;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +26,6 @@ public class FirstTimeActivity extends Activity{
         sbiText = (EditText)findViewById(R.id.sbiCol);
         hdfcText = (EditText)findViewById(R.id.hdfcCol);
         hdfcccText = (EditText)findViewById(R.id.hdfcccCol);
-
-
-
     }
 
     void returnToMain(View view){
@@ -41,9 +35,7 @@ public class FirstTimeActivity extends Activity{
            Toast.makeText(getApplicationContext(), "Enter record in proper format", Toast.LENGTH_SHORT).show();
 
        }else{
-
-
-           Intent returnIntent = new Intent();
+        Intent returnIntent = new Intent();
         returnIntent.putExtra("cash12",cashText.getText().toString());
         returnIntent.putExtra("sbi12",sbiText.getText().toString());
         returnIntent.putExtra("hdfc12",hdfcText.getText().toString());
@@ -53,5 +45,4 @@ public class FirstTimeActivity extends Activity{
         finish();
        }
     }
-
 }
